@@ -1,0 +1,39 @@
+#root {
+  max-width: 1280px;
+  width: 100vw;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.myContainer {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px var(--card-shadow);
+  padding: 1.5rem;
+  height: 100%;
+  border: 1px solid var(--card-border); 
+  color: var(--text-primary);
+  transition: transform 0.2s ease-in-out;
+}
+
+.myContainer:hover {
+  transform: translateY(-2px); 
+
+
+h3, h4, .card-title {
+  margin-top: 0;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.ai-response-box {
+  background: var(--chat-bg);
+  border: 1px solid var(--chat-border);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: left;
+  color: var(--text-primary);
+}
+} 
