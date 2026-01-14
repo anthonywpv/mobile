@@ -84,7 +84,7 @@ const DashboardPage: React.FC = () => {
             }}>
                 <Box sx={{ position: 'absolute', left: 20 }}>
                     <IconButton 
-                        onClick={() => history.push('/welcome')} // Simplemente ir a welcome
+                        onClick={() => history.push('/welcome')}
                         sx={{
                             color: 'white',
                             bgcolor: 'rgba(255, 255, 255, 0.2)',
