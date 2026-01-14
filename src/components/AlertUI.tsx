@@ -1,6 +1,5 @@
-import { Title, Container } from './common/UI';
+import { Paper, Typography, Box } from '@mui/material';
 import { type OpenMeteoResponse } from '../types/DashboardTypes';
-import { Typography } from '@mui/material';
 
 interface AlertUIProps {
     data: OpenMeteoResponse | null;
@@ -10,15 +9,12 @@ interface AlertUIProps {
 
 const getSeverity = (uv: number, rain: number, wind: number) => {
     let score = 1;
-    // UV: >6 Alto, >3 Moderado
     if (uv >= 6) score = Math.max(score, 3);
     else if (uv >= 3) score = Math.max(score, 2);
 
-    // Lluvia: >80% Alta, >50% Media
     if (rain >= 80) score = Math.max(score, 3);
     else if (rain >= 50) score = Math.max(score, 2);
 
-    // Viento: >60km/h Fuerte, >40km/h Moderado
     if (wind >= 60) score = Math.max(score, 3);
     else if (wind >= 40) score = Math.max(score, 2);
 
@@ -26,14 +22,14 @@ const getSeverity = (uv: number, rain: number, wind: number) => {
 };
 
 const riskConfig = {
-    1: { color: 'var(--alert-success, #54cad1)', label: 'Condiciones Seguras', icon: '🛡️', bg: '#ecfdf5' },
-    2: { color: 'var(--alert-warning, #fcd34d)', label: 'Precaución Moderada', icon: '⚠️', bg: '#fffbeb' },
-    3: { color: 'var(--alert-error, #f87171)', label: 'Riesgo Elevado', icon: '🚨', bg: '#fef2f2' }
+    1: { color: '#54cad1', label: 'Condiciones Seguras', icon: '🛡️', bg: '#ecfdf5' },
+    2: { color: '#fcd34d', label: 'Precaución Moderada', icon: '⚠️', bg: '#fffbeb' },
+    3: { color: '#f87171', label: 'Riesgo Elevado', icon: '🚨', bg: '#fef2f2' }
 };
 
 export default function AlertUI({ data, loading, error }: AlertUIProps) {
-    if (loading) return <div>Cargando...</div>;
-    if (error) return <div>Error: {error}</div>;
+    if (loading) return <div style={{ color: 'white' }}>Cargando...</div>;
+    if (error) return <div style={{ color: 'white' }}>Error: {error}</div>;
     if (!data || !data.daily) return null;
 
     const todayUV = data.daily.uv_index_max[0];
@@ -51,46 +47,50 @@ export default function AlertUI({ data, loading, error }: AlertUIProps) {
     };
 
     return (
-        <Container 
-            style={{ 
-                border: `2px solid ${config.color}`,
-                position: 'relative',
-                overflow: 'hidden'
-            }}
-        >
-            <Title style={{ 
+        <Paper elevation={0} sx={{ 
+            p: 3, 
+            background: 'rgba(255, 255, 255, 0.15)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            borderRadius: '20px',
+            border: `1px solid ${config.color}`,
+            boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+            overflow: 'hidden',
+            color: 'white'
+        }}>
+            <Typography variant="h6" sx={{ 
                 color: config.color, 
-                borderLeftColor: config.color, 
-                marginBottom: '0.5rem' 
+                fontWeight: 'bold',
+                mb: 2,
+                letterSpacing: 0.5,
+                textShadow: '0 2px 4px rgba(0,0,0,0.2)'
             }}>
                 Monitor de Riesgos
-            </Title>
+            </Typography>
             
-            <div style={{ height: '350px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 
-                {/* Cabecera del Estado Actual */}
-                <div style={{ 
-                    background: config.bg, 
-                    borderRadius: '12px', 
-                    padding: '1rem', 
+                <Box sx={{ 
+                    background: 'rgba(255, 255, 255, 0.1)', 
+                    borderRadius: '16px', 
+                    p: 2, 
                     display: 'flex', 
                     alignItems: 'center', 
-                    gap: '1rem',
+                    gap: 2,
                     border: `1px solid ${config.color}40`
                 }}>
                     <div style={{ fontSize: '2.5rem' }}>{config.icon}</div>
                     <div>
-                        <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'var(--text-dark)', lineHeight: 1.2 }}>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white', lineHeight: 1.2 }}>
                             {config.label}
                         </Typography>
-                        <Typography variant="body2" sx={{ color: 'var(--text-muted)' }}>
+                        <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                             Resumen diario de seguridad
                         </Typography>
                     </div>
-                </div>
+                </Box>
 
-                {/* Lista de Métricas */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', flexGrow: 1 }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                     
                     <AlertItem 
                         icon="☀️" 
@@ -118,38 +118,37 @@ export default function AlertUI({ data, loading, error }: AlertUIProps) {
                         reference="Normal: < 40 km/h" 
                         statusColor={getStatusColor(todayWind, 'wind')}
                     />
-                </div>
-            </div>
-        </Container>
+                </Box>
+            </Box>
+        </Paper>
     );
 }
 
 const AlertItem = ({ icon, label, value, unit, reference, statusColor }: any) => (
-    <div style={{ 
+    <Box sx={{ 
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center', 
-        padding: '0.6rem 0.8rem', 
-        borderRadius: '8px',
-        borderBottom: '1px solid #f0f0f0' 
+        padding: '0.8rem 0.5rem', 
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)' 
     }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-            <span style={{ fontSize: '1.2rem' }}>{icon}</span>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <span style={{ fontSize: '1.4rem' }}>{icon}</span>
             <div>
-                <Typography variant="body1" sx={{ fontWeight: 600, color: 'var(--text-dark)' }}>
+                <Typography variant="body1" sx={{ fontWeight: 600, color: 'white' }}>
                     {label}
                 </Typography>
-                <Typography variant="caption" sx={{ color: 'var(--text-muted)', display: 'block' }}>
+                <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.6)', display: 'block' }}>
                     {reference}
                 </Typography>
             </div>
-        </div>
+        </Box>
 
-        <div style={{ textAlign: 'right' }}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'var(--text-dark)', lineHeight: 1 }}>
+        <Box sx={{ textAlign: 'right' }}>
+            <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white', lineHeight: 1 }}>
                 {value} <span style={{ fontSize: '0.7em', fontWeight: 400 }}>{unit}</span>
             </Typography>
-            <div style={{ 
+            <Box sx={{ 
                 display: 'inline-block', 
                 marginTop: '4px',
                 padding: '2px 8px', 
@@ -157,10 +156,11 @@ const AlertItem = ({ icon, label, value, unit, reference, statusColor }: any) =>
                 backgroundColor: statusColor, 
                 color: 'white',
                 fontSize: '0.7rem',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
             }}>
                 {statusColor === '#ef4444' ? 'Alto' : statusColor === '#f59e0b' ? 'Medio' : 'Bajo'}
-            </div>
-        </div>
-    </div>
+            </Box>
+        </Box>
+    </Box>
 );

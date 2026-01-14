@@ -1,57 +1,36 @@
-# 🌦 WeatherAI Dashboard
+# Weather Dashboard & AI Assistant
 
-![React](https://img.shields.io/badge/React-18.2-blue?logo=react)
-![Vite](https://img.shields.io/badge/Vite-5.0-646CFF?logo=vite)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css)
-![OpenMeteo](https://img.shields.io/badge/Data-OpenMeteo-blue)
-![OpenWeather](https://img.shields.io/badge/Data-OpenWeather-orange)
-![Cohere](https://img.shields.io/badge/AI-Cohere-purple)
+Aplicación web progresiva desarrollada con React y Ionic para la visualización de datos meteorológicos en tiempo real y asistencia mediante Inteligencia Artificial. La aplicación utiliza la API de Open-Meteo para obtener pronósticos precisos y Cohere AI para impulsar un chatbot contextualizado.
 
-> *Un panel meteorológico del clima Globalmente.* Visualiza condiciones climáticas en tiempo real y conversa con un asistente de IA que analiza los datos meteorológicos por ti.
+## Características Principales
 
----
+- **Búsqueda de Ubicación:** Selector de ciudades con autocompletado utilizando la API de Geocoding de Open-Meteo.
+- **Dashboard Meteorológico:**
+  - Visualización de temperatura actual y sensación térmica.
+  - Monitor de riesgos (Índice UV, Probabilidad de Lluvia y Velocidad del Viento).
+  - Tabla de pronóstico detallado para las próximas 24 horas.
+  - Gráficos interactivos de temperatura y viento.
+- **Asistente IA (ClimaBot):** Chatbot integrado alimentado por Cohere AI que responde preguntas en lenguaje natural utilizando el contexto meteorológico actual de la ubicación seleccionada.
+- **Interfaz de Usuario (UI):**
+  - Diseño estilo Glassmorphism (efecto cristal).
+  - Fondos dinámicos que cambian según si es de día o de noche.
+  - Diseño responsivo adaptado para dispositivos móviles (Mobile-first).
 
-## 📖 Descripción
+## Tecnologías Utilizadas
 
-Este proyecto es un Dashboard Meteorológico interactivo desarrollado con tecnologías web modernas. A diferencia de las apps de clima tradicionales, esta aplicación integra *Inteligencia Artificial Generativa*.
+### Frontend
+- **React:** Biblioteca principal para la construcción de la interfaz.
+- **Ionic Framework:** Componentes de interfaz móvil y enrutamiento.
+- **Material UI (MUI):** Componentes de interfaz adicionales y sistema de diseño.
+- **Recharts:** Librería para la visualización de datos (gráficos).
+- **Vite:** Entorno de desarrollo y empaquetador.
 
-El sistema no solo muestra la temperatura o el viento, sino que incluye un asistente virtual capaz de interpretar esos datos y responder preguntas contextuales como "¿Es buen momento para salir a correr?" o "¿Qué ropa me recomiendas usar hoy?" basándose en las métricas en tiempo real.
+### APIs y Servicios
+- **Open-Meteo API:** Fuente de datos meteorológicos (sin necesidad de API Key).
+- **Open-Weather API:** Fuente de datos geológicos.
+- **Cohere AI:** Procesamiento de lenguaje natural para el chatbot.
 
----
+## Requisitos Previos
 
-## ✨ Características Principales
-
-### 🌍 Datos en Tiempo Real
-* *Integración con OpenMeteo:* Obtención precisa de temperatura, velocidad del viento, códigos climáticos y geolocalización sin necesidad de API Keys para los datos del clima.
-
-### 🤖 Asistente Meteorológico (AI Powered)
-* *Chatbot Contextual:* El bot "sabe" el clima actual antes de que tú se lo digas.
-* *Motor Cohere:* Utiliza modelos LLM avanzados para generar consejos útiles y naturales.
-* *Rate Limiting:* Sistema de protección integrado para limitar el uso de la API de IA.
-
-### ⚡ UI/UX Moderna
-* *Diseño Responsivo:* Adaptado perfectamente a móviles y escritorio.
-* *Tailwind CSS:* Estilos limpios y minimalistas.
-* *Rendimiento:* Construido sobre Vite para una experiencia de usuario instantánea.
-
----
-
-## 🛠 Stack Tecnológico
-
-| Herramienta | Función |
-| :--- | :--- |
-| *React + TypeScript* | Biblioteca de interfaz y lógica tipada. |
-| *Vite* | Entorno de desarrollo y empaquetado (Build Tool). |
-| *Tailwind CSS* | Framework de estilos "Utility-First". |
-| *OpenMeteo API* | Fuente de datos meteorológicos (Gratuita/Open Source). |
-| *OpenWeather API* | Fuente de datos geográficos (Gratuita/Open Source). |
-| *Cohere API* | Procesamiento de Lenguaje Natural (Chatbot). |
-
----
-
-## 🚀 Instalación y Despliegue
-
-### 1. Clonar el repositorio
-```bash
-git clone [https://github.com/anthonywpv/dashboard.git](https://github.com/anthonywpv/dashboard.git)
-cd dashboard
+- Node.js (versión 16 o superior)
+- NPM o Yarn

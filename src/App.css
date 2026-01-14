@@ -1,39 +1,85 @@
-#root {
-  max-width: 1280px;
-  width: 100vw;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  box-sizing: border-box;
+
+.app-background {
+  --background: #f4f6f8;
 }
 
-.myContainer {
-  background: var(--card-bg);
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px var(--card-shadow);
-  padding: 1.5rem;
-  height: 100%;
-  border: 1px solid var(--card-border); 
-  color: var(--text-primary);
-  transition: transform 0.2s ease-in-out;
+
+
+::-webkit-scrollbar {
+  display: none;
 }
 
-.myContainer:hover {
-  transform: translateY(-2px); 
-
-
-h3, h4, .card-title {
-  margin-top: 0;
-  color: var(--text-primary);
-  font-weight: 600;
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.ai-response-box {
-  background: var(--chat-bg);
-  border: 1px solid var(--chat-border);
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: left;
-  color: var(--text-primary);
+
+ion-tab-bar {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  
+  --background: transparent;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  
+  display: flex;
+  justify-content: flex-end; 
+  padding-right: 25px;
+  
+  padding-bottom: 0; 
+  height: 90px;
+  
+  pointer-events: none; 
 }
-} 
+
+ion-tab-button {
+  pointer-events: auto; 
+
+  border-radius: 50%;
+  width: 70px;  
+  height: 70px; 
+  max-width: 70px; 
+  flex: 0 0 auto;  
+  
+  
+  --background: #ffffff; 
+  background: #ffffff;
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  
+  --color: #0277bd; 
+  --color-selected: #01579b;
+  
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
+  border: none; 
+  
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+  overflow: hidden; 
+}
+
+ion-tab-button.tab-selected,
+ion-tab-button:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+ion-tab-button ion-icon {
+  font-size: 32px; 
+  margin-bottom: 0;
+}
+
+ion-tab-button ion-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-top: -2px;
+}
+
+ion-tab-button::part(native) {
+  border-radius: 50%;
+}

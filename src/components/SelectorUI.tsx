@@ -67,38 +67,45 @@ export default function SelectorUI({ onCityChange }: SelectorUIProps) {
                 autoComplete="off"
                 sx={{
                     '& .MuiOutlinedInput-root': {
-                        borderRadius: '16px',
-                        backgroundColor: 'var(--bg-card)', 
-                        color: 'var(--text-dark)',
-                        fontWeight: 'bold',
-                        fontSize: '1.1rem',
-                        boxShadow: '0 8px 20px -5px rgba(31, 189, 237, 0.25)', 
+                        borderRadius: '30px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.15)', 
+                        backdropFilter: 'blur(15px)', 
+                        WebkitBackdropFilter: 'blur(15px)',
+                        color: 'white', 
+                        fontWeight: '500',
+                        fontSize: '1rem',
+                        boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', 
                         transition: 'all 0.3s ease',
-                        paddingLeft: '10px', 
+                        paddingLeft: '5px',
+                        border: '1px solid rgba(255, 255, 255, 0.3)', 
 
                         '& fieldset': { border: 'none' }, 
                         
                         '&:hover': {
-                            backgroundColor: '#ffffff',
-                            boxShadow: '0 10px 25px -5px rgba(31, 189, 237, 0.4)',
-                            transform: 'translateY(-2px)'
+                            backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                            border: '1px solid rgba(255, 255, 255, 0.5)',
                         },
                         '&.Mui-focused': {
-                            border: '2px solid var(--color-primary)', 
-                            boxShadow: '0 0 0 4px var(--color-highlight)', 
+                            backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                            border: '1px solid #ffffff',
+                            boxShadow: '0 0 0 4px rgba(255, 255, 255, 0.1)', 
                         }
-                    }
+                    },
+                    '& .MuiInputBase-input::placeholder': {
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        opacity: 1,
+                    },
                 }}
                 slotProps={{
                     input: {
                         startAdornment: (
-                            <InputAdornment position="start" sx={{ color: 'var(--color-primary)', marginRight: '10px' }}>
-                                <MapPin size={24} />
+                            <InputAdornment position="start" sx={{ marginRight: '8px' }}>
+                                <MapPin size={22} color="white" />
                             </InputAdornment>
                         ),
                         endAdornment: (
                             <InputAdornment position="end">
-                                {loading && <CircularProgress size={20} />}
+                                {loading && <CircularProgress size={20} sx={{ color: 'white' }} />}
                             </InputAdornment>
                         )
                     }
@@ -106,7 +113,7 @@ export default function SelectorUI({ onCityChange }: SelectorUIProps) {
             />
 
             {error && (
-                <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '5px', paddingLeft: '10px' }}>
+                <div style={{ color: '#ffcdd2', fontSize: '0.8rem', marginTop: '5px', paddingLeft: '15px', textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                     Error: {error}
                 </div>
             )}
@@ -115,14 +122,15 @@ export default function SelectorUI({ onCityChange }: SelectorUIProps) {
                 <Paper
                     sx={{
                         position: 'absolute',
-                        top: '110%',
+                        top: '115%', 
                         left: 0,
                         right: 0,
                         zIndex: 10,
                         borderRadius: '16px', 
-                        boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                        boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                         overflow: 'hidden',
-                        backgroundColor: '#ffffff'
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        backdropFilter: 'blur(10px)'
                     }}
                 >
                     <List dense>
@@ -132,15 +140,15 @@ export default function SelectorUI({ onCityChange }: SelectorUIProps) {
                                     onClick={() => handleSelect(loc)}
                                     sx={{
                                         '&:hover': {
-                                            backgroundColor: 'var(--bg-body-start)',
-                                            color: 'var(--color-primary)',
+                                            backgroundColor: '#e3f2fd',
                                         }
                                     }}
                                 >
                                     <ListItemText
                                         primary={loc.name}
                                         secondary={`${loc.country}${loc.state ? `, ${loc.state}` : ''}`}
-                                        primaryTypographyProps={{ fontWeight: 'bold', color: 'var(--text-dark)' }}
+                                        primaryTypographyProps={{ fontWeight: 'bold', color: '#333' }}
+                                        secondaryTypographyProps={{ color: '#666' }}
                                     />
                                 </ListItemButton>
                             </ListItem>
