@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
@@ -36,13 +36,16 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
 
-        <Route path="/" component={WelcomePage} />
-
-        <Route path="/welcome" component={WelcomePage} />
-
-        <Route path="/chat" component={ChatPage} />
+        <Route exact path="/welcome" component={WelcomePage} />
+        <Route exact path="/chat" component={ChatPage} />
 
         <Route path="/dashboard" component={DashboardLayout} />
+
+        <Route exact path="/">
+          <Redirect to="/welcome" />
+        </Route>
+
+        <Route render={() => <Redirect to="/welcome" />} />
 
       </IonRouterOutlet>
     </IonReactRouter>
