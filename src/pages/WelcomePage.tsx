@@ -34,13 +34,11 @@ const WelcomePage: React.FC = () => {
         }
     };
 
-    // --- NUEVA LÓGICA DE GEOLOCALIZACIÓN ---
     const handleCurrentLocation = async () => {
         setLoadingLocation(true);
         try {
             const coordinates = await Geolocation.getCurrentPosition();
             const { latitude, longitude } = coordinates.coords;
-            // Redirigimos directamente al obtener coordenadas
             history.push(`/dashboard?lat=${latitude}&lon=${longitude}&name=Ubicación Actual`);
         } catch (error) {
             console.error('Error obteniendo ubicación', error);
@@ -88,7 +86,6 @@ const WelcomePage: React.FC = () => {
                                 <SelectorUI onCityChange={handleCityChange} />
                             </Box>
 
-                            {/* Botón Continuar (Solo visible si seleccionó ciudad manualmente) */}
                             {selectedCity && (
                                 <Fade in={!!selectedCity}>
                                     <Button 
@@ -134,7 +131,6 @@ const WelcomePage: React.FC = () => {
                                     fontSize: '1rem',
                                     fontWeight: 600,
                                     color: 'white',
-                                    // Estilo Glassmorphism
                                     bgcolor: 'rgba(255, 255, 255, 0.15)',
                                     backdropFilter: 'blur(10px)',
                                     border: '1px solid rgba(255, 255, 255, 0.3)',
